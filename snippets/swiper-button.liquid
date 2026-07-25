@@ -1,13 +1,25 @@
 <hover-button class="swiper-button swiper-button-prev {{ class_prev }}">
   <span class="fill-bg absolute" data-fill-bg></span>
   <span class="svg-wrapper">
-    {%- render 'icon-arrow' -%}
+    {%- if arrows_type == 'custom-chevron' -%}
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+      </svg>
+    {%- else -%}
+      {%- render 'icon-arrow', arrows_type: arrows_type -%}
+    {%- endif -%}
   </span>
 </hover-button>
 <hover-button class="swiper-button swiper-button-next {{ class_next }}">
   <span class="fill-bg absolute" data-fill-bg></span>
   <span class="svg-wrapper">
-    {%- render 'icon-arrow' -%}
+    {%- if arrows_type == 'custom-chevron' -%}
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+      </svg>
+    {%- else -%}
+      {%- render 'icon-arrow', arrows_type: arrows_type -%}
+    {%- endif -%}
   </span>
 </hover-button>
 

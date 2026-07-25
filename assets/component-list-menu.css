@@ -43,13 +43,10 @@
     z-index: var(--layer-sticky);
   }
 
-  .header-group-section:has(.header[data-sticky-type='always'][data-sticky-state='active']) ,
+  .header-group-section:has(.header[data-sticky-type='always'][data-sticky-state='active']),
   .header-group-section:has(.header[data-sticky-type='scroll-up'][data-sticky-state='active']) {
     view-transition-name: header-component;
-
-    &:has([data-sticky-type="scroll-up"]) {
-      animation: header-sticky-slide-down var(--animation-speed-slowest) forwards;
-    }
+    animation: header-sticky-slide-down var(--animation-speed-slowest) forwards;
   }
 
   .header-group-section:has(.header[data-sticky-type='scroll-up'][data-sticky-state='idle']),

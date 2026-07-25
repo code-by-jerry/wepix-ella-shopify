@@ -24,8 +24,7 @@
         slides_per_view: 1,
         space_between: block.settings.gap,
         watch_slides_progress: true,
-        autoplay: block.settings.auto_rotate,
-        effect: 'fade'
+        autoplay: block.settings.auto_rotate
       -%}
       style="
         {% render 'swiper-style',
@@ -50,7 +49,7 @@
         </div>
 
     {% if block.blocks.size > 1 %}
-        {%- render 'swiper-button' -%}
+        {%- render 'swiper-button', arrows_type: 'custom-chevron' -%}
       </div>
     </swiper-component>
     {% else %}
@@ -65,13 +64,36 @@
 
 {%- stylesheet -%}
   .announcement-bar-slider .swiper-button {
-    background-color: transparent;
-    border: none;
+    background-color: transparent !important;
+    border: none !important;
+    --arrow-color: #ffffff !important;
+    --arrow-color-hover: #ffffff !important;
+    --arrow-background: transparent !important;
+    --arrow-background-hover: transparent !important;
+    --arrow-border: transparent !important;
+    opacity: 1 !important;
+    transform: none !important;
 
     .fill-bg,
-    &:before,&:after {
-      display: none;
+    &:before,
+    &:after {
+      display: none !important;
     }
+  }
+  .announcement-bar-slider .swiper-button .svg-wrapper {
+    color: #ffffff !important;
+  }
+  .announcement-bar-slider .swiper-button svg {
+    fill: none !important;
+    stroke: currentColor !important;
+    stroke-width: 1 !important;
+    width: 16px !important;
+    height: 16px !important;
+  }
+  
+  .announcement-bar-slider a {
+    text-decoration: none;
+    color: inherit;
   }
 
   .announcement-bar-slider .swiper-slide {

@@ -13,15 +13,15 @@
       {%- if customer and customer.has_avatar? -%}
         {{ customer | avatar }}
       {%- else -%}
-        <span class="svg-wrapper">
+        <div id="kp-login-button-header-logo" style="cursor: pointer;display: flex;align-items: center;">
           {{- 'icon-account.svg' | inline_asset_content -}}
-        </span>
+        </div>
       {%- endif -%}
     </account-icon>
   {%- else -%}
-    <span class="svg-wrapper{% if account_type == 'text' %} lg:none{% endif %}">
+    <div id="kp-login-button-header-logo" class="{% if account_type == 'text' %} lg:none{% endif %}" style="cursor: pointer;display: flex;align-items: center;">
       {{- 'icon-account.svg' | inline_asset_content -}}
-    </span>
+    </div>
   {%- endif -%}
 {%- endcapture -%}
 

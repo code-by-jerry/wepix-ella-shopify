@@ -1,5 +1,5 @@
 {%- liquid
-  assign arrows_type = settings.arrows_type
+  assign arrows_type = arrows_type | default: settings.arrows_type
 -%}
 
 {%- if arrows_type == 'chevron' -%}

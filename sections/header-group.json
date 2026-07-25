@@ -43,23 +43,68 @@
               "type": "_group-announcement",
               "settings": {
                 "width_grid_item": 100,
-                "autoplay": false,
-                "autoplay_speed": 3,
-                "inherit_color_scheme": true,
-                "scheme_background": "#ffffff",
+                "autoplay": true,
+                "autoplay_speed": 5,
+                "inherit_color_scheme": false,
+                "scheme_background": "#000000",
                 "scheme_background_gradient": "",
-                "scheme_foreground_heading": "#000000",
-                "scheme_foreground": "#000000",
-                "scheme_primary": "#000f9f",
-                "scheme_primary_hover": "#000000",
-                "scheme_border": "#e6e6e6",
+                "scheme_foreground_heading": "#ffffff",
+                "scheme_foreground": "#ffffff",
+                "scheme_primary": "#ffffff",
+                "scheme_primary_hover": "#ffffff",
+                "scheme_border": "#000000",
                 "scheme_shadow": "#000000"
               },
               "blocks": {
-                "announcement_text_BXhKCE": {
+                "announcement_1": {
                   "type": "_announcement-text",
                   "settings": {
-                    "text": "End of season sale up to 50% off. <a href=\"/collections\" title=\"All collections\">Shop Now</a>",
+                    "text": "<a href=\"/collections/topwear\">Buy 2, Save ₹200 | Buy 3, Save ₹500</a>",
+                    "font": "body",
+                    "font_size": "1.4rem"
+                  },
+                  "blocks": {}
+                },
+                "announcement_2": {
+                  "type": "_announcement-text",
+                  "settings": {
+                    "text": "<a href=\"/collections/buy-2-1499\">Buy 2 Kurtas For ₹1499</a>",
+                    "font": "body",
+                    "font_size": "1.4rem"
+                  },
+                  "blocks": {}
+                },
+                "announcement_3": {
+                  "type": "_announcement-text",
+                  "settings": {
+                    "text": "<a href=\"/collections/dresses\">FREE shipping on all orders above Rs.1500</a>",
+                    "font": "body",
+                    "font_size": "1.4rem"
+                  },
+                  "blocks": {}
+                },
+                "announcement_4": {
+                  "type": "_announcement-text",
+                  "settings": {
+                    "text": "<a href=\"/collections/new-arrivals\">Same day Dispatch</a>",
+                    "font": "body",
+                    "font_size": "1.4rem"
+                  },
+                  "blocks": {}
+                },
+                "announcement_5": {
+                  "type": "_announcement-text",
+                  "settings": {
+                    "text": "Get flat 10% off on your app purchase. Use code: APP10 | <a href=\"https://hayclothing.page.link/DSF9\">DOWNLOAD NOW</a>",
+                    "font": "body",
+                    "font_size": "1.4rem"
+                  },
+                  "blocks": {}
+                },
+                "announcement_6": {
+                  "type": "_announcement-text",
+                  "settings": {
+                    "text": "<a href=\"/collections/new-arrivals\">New Arrivals updated every Thursday</a>",
                     "font": "body",
                     "font_size": "1.4rem"
                   },
@@ -67,7 +112,12 @@
                 }
               },
               "block_order": [
-                "announcement_text_BXhKCE"
+                "announcement_1",
+                "announcement_2",
+                "announcement_3",
+                "announcement_4",
+                "announcement_5",
+                "announcement_6"
               ]
             }
           },
@@ -83,8 +133,8 @@
       "settings": {
         "color_scheme": "scheme-7",
         "margin_bottom": 0,
-        "padding_top": 12,
-        "padding_bottom": 12
+        "padding_top": 11,
+        "padding_bottom": 11
       }
     },
     "header_default": {
@@ -226,14 +276,14 @@
       "name": "Header - Default",
       "settings": {
         "gap": 12,
-        "align_items": "start",
-        "logo_width": 285,
-        "logo_width_mobile": 110,
+        "align_items": "center",
+        "logo_width": 90,
+        "logo_width_mobile": 90,
         "logo_spacing_left": 0,
         "logo_spacing_right": 0,
         "logo_position": "left",
         "logo_row": "top",
-        "reveal_logo_on_sticky": true,
+        "reveal_logo_on_sticky": false,
         "menu": "main-menu",
         "menu_position": "center",
         "menu_row": "top",
@@ -276,7 +326,7 @@
         "actions_type": "icon",
         "actions_row": "top",
         "section_width": "full-width",
-        "enable_sticky_header": "always",
+        "enable_sticky_header": "scroll-up",
         "divider_width": 0,
         "divider_size": "page-width",
         "border_width": 0,
@@ -306,7 +356,7 @@
         "hot_label_3": "Trendy Style, High Fashion, SuperMarket, Electronics, Pet Supplies, Automotive, Hot Stock, Wishllist",
         "hot_label_color": "#ffffff",
         "hot_label_bg": "#ffbb49",
-        "enable_transparent_header_home": true,
+        "enable_transparent_header_home": false,
         "home_color_scheme": "inverse",
         "enable_transparent_header_product": false,
         "product_color_scheme": "default",

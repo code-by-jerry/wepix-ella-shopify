@@ -1000,6 +1000,167 @@
     margin-left: 0;
   }
 
+  /* Custom Navbar Styling */
+  .header__inline-menu .header__menu-item {
+    font-family: var(--font-body-family), sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 300 !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    transition: none !important;
+  }
+  
+  .header__inline-menu .header__menu-item .text {
+    font-family: var(--font-body-family), sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 300 !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    background-image: none !important;
+    background-size: 0 0 !important;
+    text-decoration: none !important;
+    transition: none !important;
+  }
+  
+  /* Disable Hover Underlines on Main Menu Items */
+  .header__inline-menu .header__menu-item:hover,
+  .header__inline-menu .header__menu-item:hover .text,
+  .header__inline-menu .details--dropdown:hover > .header__menu-item .text,
+  .header__inline-menu .details--dropdown:hover > .header__menu-item {
+    text-decoration: none !important;
+    background-image: none !important;
+    background-size: 0 0 !important;
+    border-bottom: none !important;
+  }
+
+  /* Simple white bg navbar (overriding transparency hover colors/borders) */
+  #header-component {
+    background-color: #ffffff !important;
+    height: auto !important;
+    min-height: unset !important;
+  }
+  #header-component .header__row {
+    background-color: #ffffff !important;
+    height: auto !important;
+    min-height: unset !important;
+  }
+  .header-wrapper {
+    height: auto !important;
+    min-height: unset !important;
+  }
+
+  /* Force logo size always static (no transitions or scale effect) */
+  .header-logo__image-container, 
+  .header__heading-logo-wrapper {
+    transform: none !important;
+    transition: none !important;
+    height: auto !important;
+    max-height: unset !important;
+  }
+
+  /* Reduce vertical padding (py) for the navbar */
+  #header-component .row-group {
+    --padding-block-start-top: 10px !important;
+    --padding-block-end-top: 10px !important;
+    --padding-block-start-bottom: 5px !important;
+    --padding-block-end-bottom: 5px !important;
+  }
+
+  #header-component .header__row--top {
+    padding-block-start: 10px !important;
+    padding-block-end: 10px !important;
+  }
+
+  #header-component .header__row--bottom {
+    padding-block-start: 5px !important;
+    padding-block-end: 5px !important;
+  }
+
+  .header__inline-menu .header__menu-item,
+  .header__inline-menu .header__menu-item.menu__link--level-1 {
+    padding-top: 0.6rem !important;
+    padding-bottom: 0.6rem !important;
+  }
+
+  .header-logo .header__heading-link {
+    padding-top: 0.4rem !important;
+    padding-bottom: 0.4rem !important;
+  }
+
+  /* Center Navbar Menu Items Horizontally and Vertically */
+  .header-block.header-menu {
+    justify-content: center !important;
+    width: 100% !important;
+  }
+  .header__inline-menu {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+  .list-menu--inline {
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  .header__inline-menu .header__menu-item {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Hide Wishlist Icon */
+  .header__icon--wishlist,
+  .header-wishlist {
+    display: none !important;
+  }
+
+  /* Prevent theme from changing icon colors/fills on hover */
+  .header__icon:hover svg,
+  .header__icon:hover span,
+  .header__icon:hover {
+    color: inherit !important;
+  }
+
+  .header__icon svg.icon-search {
+    fill: none !important;
+    stroke: currentColor !important;
+    stroke-width: 1.5 !important;
+  }
+  .header__icon svg.icon-cart {
+    fill: none !important;
+    stroke: currentColor !important;
+    stroke-width: 1.5 !important;
+  }
+  
+  .header__icon:hover svg.icon-search,
+  .header__icon:hover svg.icon-cart {
+    fill: none !important;
+    stroke: currentColor !important;
+  }
+
+  /* Keep custom lightning login icon colors static */
+  #svgkp {
+    fill: none !important;
+  }
+  #svgkp path {
+    fill: currentColor !important;
+    stroke: currentColor !important;
+  }
+  #svgkp path[fill="#FEA203"] {
+    fill: #FEA203 !important;
+    stroke: none !important;
+  }
+  
+  .header__icon:hover #svgkp path {
+    fill: currentColor !important;
+    stroke: currentColor !important;
+  }
+  .header__icon:hover #svgkp path[fill="#FEA203"] {
+    fill: #FEA203 !important;
+    stroke: none !important;
+  }
+
 {%- endstylesheet -%}
 
 <script type="application/ld+json">
