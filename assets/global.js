@@ -2289,7 +2289,8 @@ class GridView extends HTMLElement {
       if (isVertical) {
         if (width < 750 && [3, 4, 5].includes(col)) return 2;
         if (width <= 1100 && width >= 750 && [3, 4, 5].includes(col)) return 2;
-        if (width < 1300 && width > 1100 && [4, 5].includes(col)) return 3;
+        if (width < 1300 && width > 1100 && col == 5) return 4;
+        if (width < 1300 && width > 1100 && col == 4) return 4; // Keep 4 columns intact on smaller laptops
         if (width < 1700 && width >= 1300 && col == 5) return 4;
       } else {
         if (width < 750 && [3, 4, 5].includes(col)) return 2;

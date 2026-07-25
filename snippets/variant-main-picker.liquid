@@ -103,6 +103,17 @@
             index: forloop.index0,
             product: product_resource
           %}
+          
+          {%- assign downcase_option = product_option.name | downcase -%}
+          {%- if downcase_option == 'size' and product_resource.metafields.custom.size_guide != blank -%}
+            <div style="margin-top: 15px;">
+              <button type="button" onclick="document.getElementById('size-guide-modal-{{ product_resource.id }}').style.display='flex'" style="background: none; border: none; padding: 0; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                <img src="https://cdn.shopify.com/s/files/1/0994/1889/8723/files/measure-svgrepo-com.svg?v=1784982995" width="24" height="24" alt="Size Guide" style="width: 24px !important; height: 24px !important; flex-shrink: 0; display: block;">
+                <span style="font-size: 14px; text-decoration: underline; text-underline-offset: 4px; letter-spacing: 1px; color: #000;">SIZE GUIDE</span>
+              </button>
+            </div>
+          {%- endif -%}
+          
         </fieldset>
       {%- elsif variant_style == 'dropdowns' -%}
         {% liquid
@@ -138,6 +149,17 @@
               product: product_resource
             %}
           </div>
+          
+          {%- assign downcase_option = product_option.name | downcase -%}
+          {%- if downcase_option == 'size' and product_resource.metafields.custom.size_guide != blank -%}
+            <div style="margin-top: 15px;">
+              <button type="button" onclick="document.getElementById('size-guide-modal-{{ product_resource.id }}').style.display='flex'" style="background: none; border: none; padding: 0; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                <img src="https://cdn.shopify.com/s/files/1/0994/1889/8723/files/measure-svgrepo-com.svg?v=1784982995" width="24" height="24" alt="Size Guide" style="width: 24px !important; height: 24px !important; flex-shrink: 0; display: block;">
+                <span style="font-size: 14px; text-decoration: underline; text-underline-offset: 4px; letter-spacing: 1px; color: #000;">SIZE GUIDE</span>
+              </button>
+            </div>
+          {%- endif -%}
+          
         </div>
       {%- endif -%}
     {%- endfor -%}

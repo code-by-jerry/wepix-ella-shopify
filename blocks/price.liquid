@@ -51,6 +51,25 @@
     show_sale_price_first: bl_stts.show_sale_price_first
   %}
 
+  <div style="font-size: 13px; margin-top: 5px; margin-bottom: 5px; color: var(--color-foreground);">Tax included.</div>
+
+  {% if product_resource.metafields.custom.is_certified == true or product_resource.metafields.custom.is_certified == 'true' or product_resource.metafields.custom.is_certified %}
+    <div class="product-certified-badge" style="margin-top: 15px; margin-bottom: 5px;">
+      <img src="https://cdn.shopify.com/s/files/1/0994/1889/8723/files/certified_858e7c0f-8382-4660-b9ed-b5b548601a09.webp?v=1784982056" alt="Certified" width="140" height="auto" loading="lazy" style="display: block; width: 140px; max-width: 100%;">
+    </div>
+  {% endif %}
+
+  {% if product_resource.metafields.custom.offers != blank %}
+    <style>
+      .product-offer-badge h3, .product-offer-badge h4, .product-offer-badge h5 { font-size: 14px !important; margin: 0 0 5px 0 !important; font-weight: bold !important; line-height: 1.2 !important; }
+      .product-offer-badge p { margin: 0 !important; font-size: 13px !important; }
+      .product-offer-badge ul { margin: 0 !important; padding-left: 20px !important; font-size: 13px !important; }
+    </style>
+    <div class="product-offer-badge" style="background-color: #F5E3E3; color: #000; padding: 10px 12px; margin-top: 12px; margin-bottom: 5px; border-radius: 0; font-size: 13px; line-height: 1.4;">
+      <div style="margin: 0; padding: 0;">{{ product_resource.metafields.custom.offers | metafield_tag }}</div>
+    </div>
+  {% endif %}
+
   {% if bl_stts.show_tax_info %}
     <div class="tax-note">
       {%- if cart.duties_included and cart.taxes_included -%}

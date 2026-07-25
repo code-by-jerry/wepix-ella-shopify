@@ -179,7 +179,12 @@ style="
                           assign meta_ref = block.settings.content | prepend: '<div class="rte">' | append: '</div>' | append: block.settings.page.content
                         endif
                       else 
-                        assign meta_ref = product.metafields.custom[block.settings.product_tab_key_metafield] | default : product.metafields.c_f[block.settings.product_tab_key_metafield]
+                        assign raw_meta = product.metafields.custom[block.settings.product_tab_key_metafield] | default : product.metafields.c_f[block.settings.product_tab_key_metafield]
+                        if raw_meta.type != blank
+                          assign meta_ref = raw_meta | metafield_tag
+                        else
+                          assign meta_ref = raw_meta
+                        endif
                       endif
                     %}
                     {% if meta_ref != blank %}
@@ -244,7 +249,12 @@ style="
                     assign meta_ref = block.settings.content | prepend: '<div class="rte">' | append: '</div>' | append: block.settings.page.content
                   endif
                 else 
-                  assign meta_ref = product.metafields.custom[block.settings.product_tab_key_metafield] | default : product.metafields.c_f[block.settings.product_tab_key_metafield]
+                  assign raw_meta = product.metafields.custom[block.settings.product_tab_key_metafield] | default : product.metafields.c_f[block.settings.product_tab_key_metafield]
+                  if raw_meta.type != blank
+                    assign meta_ref = raw_meta | metafield_tag
+                  else
+                    assign meta_ref = raw_meta
+                  endif
                 endif
               %}
               {% if meta_ref != blank %}

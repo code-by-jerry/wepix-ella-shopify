@@ -101,3 +101,452 @@
     background: var(--color-background);
   }
 }
+
+/* CUSTOM COLLECTION FILTERS UI */
+.facets__form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.facets__form-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.facets__heading {
+  background: #000;
+  color: #fff;
+  padding: 10px 25px;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.facets__heading svg {
+  fill: #fff;
+  width: 16px;
+  height: 16px;
+}
+
+.facets__disclosure {
+  border: 1px solid #ddd;
+  padding: 8px 15px;
+}
+
+.facets__summary {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 13px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.facets__summary svg {
+  width: 12px;
+}
+
+/* Active filters & counts row */
+.active-facets {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 15px;
+  font-size: 12px;
+  color: #666;
+}
+
+@media screen and (max-width: 749px) {
+  .collection .grid__item:only-child {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+.collection .loading-overlay {
+  position: absolute;
+  z-index: 1;
+  width: 1.8rem;
+  background-color: var(--color-background);
+}
+
+.collection .loading-overlay .loading__spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+@media screen and (max-width: 749px) {
+  .collection .loading-overlay {
+    top: 0;
+    right: 0;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .collection .loading-overlay {
+    left: 0;
+  }
+}
+
+.collection .loading-overlay {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: none;
+  width: 100%;
+  padding: 0 1.5rem;
+  opacity: var(--opacity-70);
+}
+
+@media screen and (min-width: 750px) {
+  .collection .loading-overlay {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+}
+
+.collection.loading .loading-overlay {
+  display: block;
+}
+
+.collection--empty .title-wrapper {
+  margin-top: 10rem;
+  margin-bottom: 15rem;
+}
+
+.collection__description > * {
+  margin: 0;
+}
+
+.collection__title.title-wrapper {
+  margin-bottom: 2.5rem;
+}
+
+.collection__title .title:not(:only-child) {
+  margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 1025px) {
+  .collection__title--desktop-slider .title {
+    margin-bottom: 2.5rem;
+  }
+
+  .collection__title.title-wrapper--self-padded-tablet-down {
+    padding: 0 5rem;
+  }
+}
+
+.collection__view-all a:not(.link) {
+  margin-top: 1rem;
+}
+
+@media screen and (min-width: 750px) {
+  .product-vertical.has_slide_mobile .swiper-wrapper {
+    display: grid;
+  }
+}
+
+.product-vertical .swiper-slide.flex {
+  display: flex;
+}
+
+.collection .widget-layout--spotlight {
+  .swiper {
+    width: 100%;
+    background: var(--color-background);
+  }
+}
+
+/* CUSTOM COLLECTION FILTERS UI */
+.facets__form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.facets__form-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.facets__heading {
+  background: #000;
+  color: #fff;
+  padding: 10px 25px;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.facets__heading svg {
+  fill: #fff;
+  width: 16px;
+  height: 16px;
+}
+
+.facets__disclosure {
+  border: 1px solid #ddd;
+  padding: 8px 15px;
+}
+
+.facets__summary {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 13px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.facets__summary svg {
+  width: 12px;
+}
+
+/* Active filters & counts row */
+.active-facets {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 15px;
+  font-size: 12px;
+  color: #666;
+}
+
+.active-facets__button-remove {
+  color: #666;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.results-count {
+  font-weight: 600;
+}
+
+/* Force Size filter to display as an open row instead of dropdown */
+.facets__form .filter-size {
+  border: none !important;
+  padding: 0 !important;
+  width: 100%;
+  margin-top: 20px;
+}
+.facets__form .filter-size > summary {
+  display: none !important;
+}
+.facets__form .filter-size .details__list {
+  display: block !important;
+  position: static !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  border: none !important;
+  transform: none !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+.facets__form .filter-size .facets__list {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+}
+.facets__form .filter-size .facets__item {
+  margin: 0 !important;
+}
+.facets__form .filter-size .facets__label {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+  height: 35px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  color: #333;
+  padding: 0 15px;
+}
+.facets__form .filter-size .facets__label input:checked + .svg-wrapper,
+.facets__form .filter-size .facets__label .svg-wrapper {
+  display: none !important; /* Hide native checkboxes/swatches */
+}
+.facets__form .filter-size .facets__label:hover {
+  border-color: #000;
+}
+.facets__form .filter-size input:checked + .facets__label {
+  border-color: #000;
+  background: #000;
+  color: #fff;
+}
+
+/* CUSTOM HYBRID FILTER CSS */
+@media screen and (min-width: 750px) {
+  /* Hide standard filter panels on desktop main page (since they are in the drawer) */
+  .facets__form .facets__panel:not(.filter-size) {
+    display: none !important;
+  }
+
+  /* Hide the native drawer trigger when desktop controls are visible */
+  .mobile-facets__disclosure > summary {
+    display: none !important;
+  }
+}
+
+/* Force left alignment for all filter drawer openers */
+.mobile-facets__wrapper,
+.mobile-facets__disclosure,
+.mobile-facets__open-wrapper {
+  justify-content: flex-start !important;
+  align-items: center !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+  text-align: left !important;
+}
+
+.mobile-facets__open {
+  background: #111 !important;
+  color: #fff !important;
+  border-radius: 0 !important;
+  padding: 10px 24px !important;
+}
+
+/* Style the custom drawer trigger button */
+.custom-drawer-trigger {
+  background: #111;
+  color: #fff;
+  padding: 10px 24px;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #111;
+  height: 42px;
+  box-sizing: border-box;
+}
+.custom-drawer-trigger svg {
+  fill: none;
+  stroke: #fff;
+  width: 14px;
+  height: 14px;
+}
+
+/* Attach SORT BY box directly next to FILTER button */
+.sorting-wrapper-leftcol {
+  display: inline-flex;
+  align-items: center;
+}
+
+.sorting-wrapper-leftcol .facet-filters.sorting {
+  display: inline-flex;
+}
+
+.sorting-wrapper-leftcol .facet-filters__field-label {
+  display: none !important; /* Hide 'Sort by:' text label */
+}
+
+.sorting-wrapper-leftcol .facet-filters__sort {
+  border: 1px solid #111 !important;
+  border-left: none !important; /* Joined with FILTER button */
+  height: 42px;
+  box-sizing: border-box;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  cursor: pointer;
+}
+
+.sorting-wrapper-leftcol .facet-filters__sort summary {
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  color: #111;
+  letter-spacing: 1px;
+}
+
+/* Position Product Count on the right of the active facets row */
+/* Centered Collection Title */
+/* Centered Collection Title */
+.custom-collection-title-wrapper {
+  grid-column: 1 / -1 !important;
+  width: 100% !important;
+  text-align: center !important;
+  margin: 30px auto 20px auto !important;
+  display: block !important;
+}
+
+.custom-collection-title-wrapper .collection-title {
+  font-size: 38px !important;
+  font-weight: 400 !important;
+  color: #111 !important;
+  text-align: center !important;
+  margin: 0 auto !important;
+  letter-spacing: -0.5px !important;
+  word-break: normal !important;
+  white-space: nowrap !important;
+}
+
+/* Ensure facets container spans full grid width */
+.facets-container,
+.facets {
+  grid-column: 1 / -1 !important;
+  width: 100% !important;
+}
+
+/* Ensure Size filter panel displays as horizontal pills row */
+.facets__form .filter-size {
+  border: none !important;
+  padding: 0 !important;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.facets__form .filter-size summary {
+  display: none !important; /* Hide Size dropdown title */
+}
+
+.facets__form .filter-size .facets__display {
+  position: static !important;
+  border: none !important;
+  box-shadow: none !important;
+  width: 100% !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+.facets__form .filter-size ul {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 0 !important;
+  margin: 0 !important;
+}

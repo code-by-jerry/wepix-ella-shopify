@@ -1,0 +1,211 @@
+{{ 'shoppable-reels.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'shoppable-reels.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+  .shoppable-reels-heading {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+{%- endstyle -%}
+
+<div class="shoppable-reels-section page-width section-{{ section.id }}-padding">
+  {%- if section.settings.title != blank -%}
+    <h2 class="shoppable-reels-heading {{ section.settings.heading_size }}">{{ section.settings.title }}</h2>
+  {%- endif -%}
+
+  <shoppable-reels>
+    <div class="shoppable-reels-slider-wrapper">
+      <button class="shoppable-reels-arrow shoppable-reels-prev" disabled>
+        <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+      </button>
+
+      <div class="shoppable-reels-carousel">
+        {%- for block in section.blocks -%}
+          {%- assign product = block.settings.product -%}
+        {%- assign video = block.settings.video -%}
+        
+        {%- assign video_url = '' -%}
+        {%- if video != blank -%}
+          {%- for source in video.sources -%}
+            {%- if source.format == 'mp4' -%}
+              {%- assign video_url = source.url -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if video_url == '' -%}
+            {%- assign video_url = video.sources[0].url -%}
+          {%- endif -%}
+        {%- endif -%}
+
+        <div class="shoppable-reel-card"
+             data-video-src="{{ video_url }}"
+             data-product-url="{{ product.url }}"
+             data-product-title="{{ product.title | escape }}"
+             data-product-price="{{ product.price | money }}"
+             data-product-image="{{ product.featured_image | image_url: width: 200 }}"
+             {{ block.shopify_attributes }}>
+             
+          {%- if video != blank -%}
+            {{ video | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '400x' }}
+          {%- endif -%}
+
+          <div class="shoppable-reel-overlay">
+             <div class="shoppable-reel-play">
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+             </div>
+             {%- if product != blank -%}
+               <div class="shoppable-reel-card-product">
+                 {{ product.featured_image | image_url: width: 100 | image_tag: loading: 'lazy' }}
+                 <p>{{ product.title }}</p>
+               </div>
+             {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+      </div>
+      <button class="shoppable-reels-arrow shoppable-reels-next">
+        <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+      </button>
+    </div>
+
+    <shoppable-reels-modal>
+      <div class="shoppable-modal-inner">
+        <button class="shoppable-modal-close" aria-label="Close">
+           <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+
+        <video class="shoppable-modal-video" controls playsinline loop></video>
+
+        <div class="shoppable-modal-actions">
+           <button class="shoppable-modal-action-btn">
+             <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+             <span>Like</span>
+           </button>
+           <button class="shoppable-modal-action-btn">
+             <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+             <span>Share</span>
+           </button>
+        </div>
+
+        <div class="shoppable-modal-mini-product">
+           <div class="shoppable-modal-mini-product-top">
+             <img src="" alt="Product" loading="lazy">
+             <div class="shoppable-modal-mini-product-info">
+                <p class="shoppable-modal-mini-title"></p>
+                <p class="shoppable-modal-mini-price"></p>
+             </div>
+           </div>
+           <button class="shoppable-modal-btn">ADD TO CART</button>
+        </div>
+
+        <!-- Sliding Bottom Sheet -->
+        <div class="shoppable-bottom-sheet">
+           <div class="shoppable-sheet-header">
+              <h3>SHOP NOW</h3>
+              <button class="shoppable-sheet-close" aria-label="Close panel">
+                 <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+              </button>
+           </div>
+           <div class="shoppable-sheet-content">
+              <div class="shoppable-sheet-product-header"></div>
+              <div class="shoppable-sheet-content-inner"></div>
+           </div>
+        </div>
+
+      </div>
+    </shoppable-reels-modal>
+  </shoppable-reels>
+</div>
+
+{% schema %}
+{
+  "name": "Shoppable Reels",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "Feel the Reel",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "Small"
+        },
+        {
+          "value": "h1",
+          "label": "Medium"
+        },
+        {
+          "value": "h0",
+          "label": "Large"
+        }
+      ],
+      "default": "h1",
+      "label": "Heading Size"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "reel",
+      "name": "Reel",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Linked Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shoppable Reels",
+      "blocks": [
+        { "type": "reel" },
+        { "type": "reel" },
+        { "type": "reel" }
+      ]
+    }
+  ]
+}
+{% endschema %}

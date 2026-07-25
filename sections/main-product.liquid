@@ -181,9 +181,16 @@
   }
 
   @media screen and (min-width: 750px) {
-    .product-information__media {
+    .product-details {
       position: sticky;
-      top: 0;
+      top: 2rem;
+      align-self: start;
+      max-height: calc(100vh - 4rem);
+      overflow-y: auto;
+      scrollbar-width: none; /* Hide scrollbar for cleaner look */
+    }
+    .product-details::-webkit-scrollbar {
+      display: none;
     }
 
     .product-information__grid {
@@ -366,6 +373,15 @@
     --sticky-header-offset: var(--header-height);
   }
 {% endstylesheet %}
+
+{%- if product.metafields.custom.size_guide != blank -%}
+  <div id="size-guide-modal-{{ product.id }}" onclick="if(event.target === this) this.style.display='none'" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 2147483647; justify-content: center; align-items: center; padding: 20px;">
+    <div style="position: relative; background: #fff; padding: 20px; border-radius: 8px; max-width: 90vw; max-height: 90vh; overflow: auto; display: flex; flex-direction: column; align-items: center; box-shadow: 0 5px 15px rgba(0,0,0,0.3);">
+      <button type="button" onclick="document.getElementById('size-guide-modal-{{ product.id }}').style.display='none'" style="position: absolute; top: -10px; right: -10px; background: #000; color: #fff; border: 2px solid #fff; width: 32px; height: 32px; border-radius: 16px; cursor: pointer; font-weight: bold; font-size: 16px; display: flex; align-items: center; justify-content: center; z-index: 10;">✕</button>
+      <img src="{{ product.metafields.custom.size_guide | image_url: width: 1000 }}" alt="Size Guide" style="max-width: 100%; height: auto; display: block;">
+    </div>
+  </div>
+{%- endif -%}
 
 {% schema %}
 {

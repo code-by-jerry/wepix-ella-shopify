@@ -57,10 +57,10 @@
   {% if show_compare_price %}
     <span role="group">
       <span class="visually-hidden">{{ 'content.price_sale' | t }}&nbsp;</span>
-      <span class="price price-item price-item--sale price-item--last">{{ price | default: '&nbsp;' }}</span>
+      <span class="price price-item price-item--sale price-item--last" style="font-weight: bold;">{{ price | default: '&nbsp;' }}</span>
     </span>
   {% else %}
-    <span class="price price-item price-item--sale price-item--last">{{ price | default: '&nbsp;' }}</span>
+    <span class="price price-item price-item--sale price-item--last" style="font-weight: bold;">{{ price | default: '&nbsp;' }}</span>
   {% endif %}
 
   {% if show_sale_price_first == true and show_compare_price %}

@@ -190,6 +190,84 @@
   <script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
+<style>
+  .custom-metadata-accordions {
+    margin-top: 30px;
+    border-top: 1px solid #e5e5e5;
+  }
+  .custom-metadata-accordions details {
+    border-bottom: 1px solid #e5e5e5;
+  }
+  .custom-metadata-accordions summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+    letter-spacing: 1.5px;
+    list-style: none;
+  }
+  .custom-metadata-accordions summary::-webkit-details-marker {
+    display: none;
+  }
+  .custom-metadata-accordions summary::after {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-right: 1.5px solid #777;
+    border-bottom: 1.5px solid #777;
+    transform: translateY(-2px) rotate(45deg);
+    transition: transform 0.3s ease;
+    margin-right: 5px;
+  }
+  .custom-metadata-accordions details[open] summary::after {
+    transform: translateY(2px) rotate(225deg);
+  }
+  .custom-metadata-accordions .accordion-content {
+    padding-bottom: 20px;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+  }
+  .custom-metadata-accordions .accordion-content p {
+    margin-top: 0;
+  }
+</style>
+
+<div class="custom-metadata-accordions">
+  {%- if product.description != blank -%}
+    <details>
+      <summary>DESCRIPTION</summary>
+      <div class="accordion-content">{{ product.description }}</div>
+    </details>
+  {%- endif -%}
+
+  {%- if product.metafields.custom.wash_care_instructions != blank -%}
+    <details>
+      <summary>WASH CARE INSTRUCTIONS</summary>
+      <div class="accordion-content">{{ product.metafields.custom.wash_care_instructions | metafield_tag }}</div>
+    </details>
+  {%- endif -%}
+
+  {%- if product.metafields.custom.shipping_exchanges != blank -%}
+    <details>
+      <summary>SHIPPING & EXCHANGES</summary>
+      <div class="accordion-content">{{ product.metafields.custom.shipping_exchanges | metafield_tag }}</div>
+    </details>
+  {%- endif -%}
+
+  {%- if product.metafields.custom.customer_care != blank -%}
+    <details>
+      <summary>CUSTOMER CARE</summary>
+      <div class="accordion-content">{{ product.metafields.custom.customer_care | metafield_tag }}</div>
+    </details>
+  {%- endif -%}
+</div>
+
 {% stylesheet %}
   .buy-buttons-block {
     width: 100%;

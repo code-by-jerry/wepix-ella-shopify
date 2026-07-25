@@ -1,4 +1,4 @@
-{{ 'template-collection.css' | asset_url | stylesheet_tag }}
+﻿{{ 'template-collection.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
   if cart.attributes.pagination != blank and cart.attributes.pagination
@@ -26,12 +26,6 @@
     --p-spacing-b: {{ section.settings.padding_bottom }}px;
   "
 >
-  <div class="custom-collection-title-wrapper text-center w-full pt-5">
-    <h1 class="collection-title text-4xl font-normal text-foreground tracking-tight m-0 text-center">
-      {{ collection.title | escape }}
-    </h1>
-  </div>
-
   {% content_for 'block',
     type: 'filters',
     id: 'filters',
@@ -59,121 +53,6 @@
         --padding-inline-end: {{ section.settings.padding-inline-end }}px;
       "
     >
-
-      <!-- Custom Frontend Filter UI Section -->
-      <div class="custom-filter-ui-wrapper" style="display: flex; align-items: flex-start; justify-content: flex-start; gap: 30px; margin-bottom: 25px; flex-wrap: wrap;">
-        
-        <!-- Filter and Sort Block Wrapper -->
-        <div style="display: flex; flex-direction: column; gap: 12px; max-width: 350px; flex: 1 1 350px;">
-          <div class="custom-filter-block" style="display: flex; align-items: stretch; width: 100%;">
-            <button type="button" style="display: flex; align-items: center; justify-content: center; gap: 12px; background-color: #1a1a1a; color: #ffffff; padding: 14px 20px; border: 1px solid #1a1a1a; cursor: pointer; text-transform: uppercase; font-size: 1.2rem; font-weight: 600; letter-spacing: 0.15em; width: 40%;">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 7H20M7 12H17M10 17H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              FILTER
-            </button>
-            <details class="custom-sort-dropdown" style="width: 60%; position: relative;">
-              <summary style="display: flex; align-items: center; justify-content: space-between; background-color: transparent; color: #1a1a1a; padding: 14px 20px; border: 1px solid #1a1a1a; border-left: none; cursor: pointer; text-transform: uppercase; font-size: 1.2rem; font-weight: 600; letter-spacing: 0.15em; width: 100%; list-style: none;">
-                SORT BY
-                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-caret" viewBox="0 0 10 6" style="width: 12px; height: 7px;">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path>
-                </svg>
-              </summary>
-              <ul style="position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #1a1a1a; border-top: none; list-style: none; padding: 0; margin: 0; z-index: 10; font-size: 1.4rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                <li style="padding: 12px 20px; cursor: pointer; border-bottom: 1px solid #eee; transition: background 0.2s;" data-sort="manual" onmouseover="this.style.backgroundColor='#f5f5f5'" onmouseout="this.style.backgroundColor='transparent'">Featured</li>
-                <li style="padding: 12px 20px; cursor: pointer; border-bottom: 1px solid #eee; transition: background 0.2s;" data-sort="best-selling" onmouseover="this.style.backgroundColor='#f5f5f5'" onmouseout="this.style.backgroundColor='transparent'">Best selling</li>
-                <li style="padding: 12px 20px; cursor: pointer; border-bottom: 1px solid #eee; transition: background 0.2s;" data-sort="title-ascending" onmouseover="this.style.backgroundColor='#f5f5f5'" onmouseout="this.style.backgroundColor='transparent'">Alphabetically, A-Z</li>
-                <li style="padding: 12px 20px; cursor: pointer; border-bottom: 1px solid #eee; transition: background 0.2s;" data-sort="title-descending" onmouseover="this.style.backgroundColor='#f5f5f5'" onmouseout="this.style.backgroundColor='transparent'">Alphabetically, Z-A</li>
-                <li style="padding: 12px 20px; cursor: pointer; border-bottom: 1px solid #eee; transition: background 0.2s;" data-sort="price-ascending" onmouseover="this.style.backgroundColor='#f5f5f5'" onmouseout="this.style.backgroundColor='transparent'">Price, low to high</li>
-                <li style="padding: 12px 20px; cursor: pointer; border-bottom: 1px solid #eee; transition: background 0.2s;" data-sort="price-descending" onmouseover="this.style.backgroundColor='#f5f5f5'" onmouseout="this.style.backgroundColor='transparent'">Price, high to low</li>
-                <li style="padding: 12px 20px; cursor: pointer; border-bottom: 1px solid #eee; transition: background 0.2s;" data-sort="created-ascending" onmouseover="this.style.backgroundColor='#f5f5f5'" onmouseout="this.style.backgroundColor='transparent'">Date, old to new</li>
-                <li style="padding: 12px 20px; cursor: pointer; transition: background 0.2s;" data-sort="created-descending" onmouseover="this.style.backgroundColor='#f5f5f5'" onmouseout="this.style.backgroundColor='transparent'">Date, new to old</li>
-              </ul>
-            </details>
-          </div>
-          <!-- Dynamic Product Count -->
-          <div style="font-size: 1.4rem; color: #555; padding-left: 2px;">
-            {{ collection.products_count }} products
-          </div>
-        </div>
-
-        <!-- Size Pills Block -->
-        <div class="custom-size-pills" style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 2px;">
-          <button type="button" data-size="S" style="padding: 10px 24px; border: 1px solid #a3a3a3; border-radius: 9999px; background: transparent; color: #1a1a1a; font-size: 1.4rem; cursor: pointer; min-width: 70px; text-align: center; transition: all 0.2s;">S</button>
-          <button type="button" data-size="M" style="padding: 10px 24px; border: 1px solid #a3a3a3; border-radius: 9999px; background: transparent; color: #1a1a1a; font-size: 1.4rem; cursor: pointer; min-width: 70px; text-align: center; transition: all 0.2s;">M</button>
-          <button type="button" data-size="L" style="padding: 10px 24px; border: 1px solid #a3a3a3; border-radius: 9999px; background: transparent; color: #1a1a1a; font-size: 1.4rem; cursor: pointer; min-width: 70px; text-align: center; transition: all 0.2s;">L</button>
-          <button type="button" data-size="XL" style="padding: 10px 24px; border: 1px solid #a3a3a3; border-radius: 9999px; background: transparent; color: #1a1a1a; font-size: 1.4rem; cursor: pointer; min-width: 70px; text-align: center; transition: all 0.2s;">XL</button>
-          <button type="button" data-size="XXL" style="padding: 10px 24px; border: 1px solid #a3a3a3; border-radius: 9999px; background: transparent; color: #1a1a1a; font-size: 1.4rem; cursor: pointer; min-width: 70px; text-align: center; transition: all 0.2s;">XXL</button>
-        </div>
-      </div>
-
-      <style>
-        .custom-sort-dropdown summary::-webkit-details-marker { display: none; }
-        .custom-sort-dropdown summary { list-style: none; }
-      </style>
-
-      <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          const urlParams = new URLSearchParams(window.location.search);
-          
-          // Sort Logic
-          const sortDropdown = document.querySelector('.custom-sort-dropdown');
-          if(sortDropdown) {
-            const sortOptions = sortDropdown.querySelectorAll('ul li');
-            const currentSort = urlParams.get('sort_by') || '{{ collection.sort_by | default: collection.default_sort_by }}';
-            
-            sortOptions.forEach(option => {
-              // Highlight active sort option
-              if(option.dataset.sort === currentSort) {
-                option.style.fontWeight = 'bold';
-              }
-              
-              option.addEventListener('click', function() {
-                urlParams.set('sort_by', this.dataset.sort);
-                window.location.search = urlParams.toString();
-              });
-            });
-
-            // Close dropdown if clicked outside
-            document.addEventListener('click', function(e) {
-              if(!sortDropdown.contains(e.target)) {
-                sortDropdown.removeAttribute('open');
-              }
-            });
-          }
-
-          // Size Pill Logic
-          const sizePills = document.querySelectorAll('.custom-size-pills button');
-          if(sizePills.length > 0) {
-            // Shopify standard size parameters
-            const currentSize = urlParams.get('filter.v.option.size') || urlParams.get('filter.v.option.Size') || urlParams.get('filter.v.option.SIZE') || urlParams.get('filter.p.m.custom.size') || '';
-            
-            sizePills.forEach(pill => {
-              const sizeVal = pill.dataset.size;
-              
-              // Highlight active size
-              if(currentSize.toLowerCase() === sizeVal.toLowerCase()) {
-                pill.style.backgroundColor = '#1a1a1a';
-                pill.style.color = '#ffffff';
-                pill.style.borderColor = '#1a1a1a';
-              }
-              
-              pill.addEventListener('click', function() {
-                // Clear any existing size filters (capitalized, lowercase, etc.)
-                const sizeKeys = Array.from(urlParams.keys()).filter(k => k.toLowerCase().includes('size'));
-                sizeKeys.forEach(k => urlParams.delete(k));
-
-                if (currentSize.toLowerCase() !== sizeVal.toLowerCase()) {
-                  // Standard Shopify filter format (capital 'Size' is most common)
-                  urlParams.set('filter.v.option.Size', sizeVal);
-                }
-                
-                window.location.search = urlParams.toString();
-              });
-            });
-          }
-        });
-      </script>
 
       <div class="product-grid-container" id="ProductGridContainer">
         {%- if collection.products.size == 0 -%}
@@ -215,7 +94,7 @@
                   {% endif %}
                 >
                   {% # theme-check-disable %}
-                  {% render 'card-product-custom', product_card_product: product %}
+                  {% content_for "block", type: "_product-card", id: "product-card", closest.product: product %}
                   {% # theme-check-enable %}
                 </li>
               {% endfor %}

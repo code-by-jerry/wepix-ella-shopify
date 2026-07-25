@@ -1,0 +1,242 @@
+{% schema %}
+{
+  "name": "Collection Highlight",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "main_banner",
+      "name": "Main Banner (Left)",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Main Image (Desktop)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Main Image (Mobile)"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Banner Link"
+        }
+      ]
+    },
+    {
+      "type": "grid_banner",
+      "name": "Grid Banner (Right)",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Grid Image (Square)"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Banner Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Highlight Banner",
+      "blocks": [
+        { "type": "main_banner" },
+        { "type": "grid_banner" },
+        { "type": "grid_banner" },
+        { "type": "grid_banner" },
+        { "type": "grid_banner" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .highlight-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+  }
+
+  .highlight-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+    width: 100%;
+  }
+
+  @media screen and (min-width: 990px) {
+    .highlight-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1.35fr; /* Tweaked slightly to give left image more width as requested */
+      gap: 6px;
+      align-items: stretch;
+      width: 100%;
+    }
+    .highlight-main {
+      height: 100%;
+    }
+    .highlight-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 6px;
+      aspect-ratio: 1 / 1; /* Forces right column to be a perfect square */
+    }
+    .highlight-main .highlight-item {
+      height: 100%; 
+    }
+    .highlight-main .highlight-item img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover; 
+      display: block;
+    }
+  }
+
+  .highlight-item {
+    display: block;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    background-color: #f4f4f4;
+    border-radius: 8px; /* Medium rounded corners */
+  }
+
+  .highlight-grid .highlight-item {
+    width: 100%;
+    height: 100%;
+  }
+
+  .highlight-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease-out;
+  }
+
+  /* Hover Zoom Effect */
+  @media (hover: hover) {
+    .highlight-item:hover img {
+      transform: scale(1.08);
+    }
+  }
+
+  /* Mobile specific images */
+  .highlight-image--mobile {
+    display: none !important;
+  }
+  @media screen and (max-width: 989px) {
+    .highlight-image--desktop-only {
+      display: none !important;
+    }
+    .highlight-image--mobile {
+      display: block !important;
+    }
+  }
+</style>
+
+<div class="custom-collection-highlight page-width section-{{ section.id }}-padding">
+  <div class="highlight-wrapper">
+    
+    <div class="highlight-main">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'main_banner' -%}
+          {%- if block.settings.link != blank -%}
+            <a href="{{ block.settings.link }}" class="highlight-item" {{ block.shopify_attributes }}>
+          {%- else -%}
+            <div class="highlight-item" {{ block.shopify_attributes }}>
+          {%- endif -%}
+
+          {%- if block.settings.image != blank -%}
+            {%- assign desktop_class = 'highlight-image' -%}
+            {%- if block.settings.image_mobile != blank -%}
+              {%- assign desktop_class = 'highlight-image highlight-image--desktop-only' -%}
+              {{ block.settings.image_mobile | image_url: width: 800 | image_tag: class: 'highlight-image highlight-image--mobile', loading: 'lazy' }}
+            {%- endif -%}
+            {{ block.settings.image | image_url: width: 1200 | image_tag: class: desktop_class, loading: 'lazy' }}
+          {%- else -%}
+            {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg highlight-image' }}
+          {%- endif -%}
+
+          {%- if block.settings.link != blank -%}
+            </a>
+          {%- else -%}
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="highlight-grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'grid_banner' -%}
+          {%- if block.settings.link != blank -%}
+            <a href="{{ block.settings.link }}" class="highlight-item" {{ block.shopify_attributes }}>
+          {%- else -%}
+            <div class="highlight-item" {{ block.shopify_attributes }}>
+          {%- endif -%}
+
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 800 | image_tag: class: 'highlight-image', loading: 'lazy' }}
+          {%- else -%}
+            {{ 'collection-2' | placeholder_svg_tag: 'placeholder-svg highlight-image' }}
+          {%- endif -%}
+
+          {%- if block.settings.link != blank -%}
+            </a>
+          {%- else -%}
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+  </div>
+</div>

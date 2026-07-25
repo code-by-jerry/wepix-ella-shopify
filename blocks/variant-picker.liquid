@@ -7,6 +7,94 @@
 
 {% render 'variant-main-picker', context: 'main', product_resource: product_resource %}
 
+{%- if product_resource.metafields.custom.key_highlights != blank -%}
+  {% assign kh_count = 0 %}
+  {% if product_resource.metafields.custom.key_highlights.value.fit != blank %}{% assign kh_count = kh_count | plus: 1 %}{% endif %}
+  {% if product_resource.metafields.custom.key_highlights.value.top_fabric != blank %}{% assign kh_count = kh_count | plus: 1 %}{% endif %}
+  {% if product_resource.metafields.custom.key_highlights.value.neck != blank %}{% assign kh_count = kh_count | plus: 1 %}{% endif %}
+  {% if product_resource.metafields.custom.key_highlights.value.sleeve_styling != blank %}{% assign kh_count = kh_count | plus: 1 %}{% endif %}
+  {% if product_resource.metafields.custom.key_highlights.value.sleeve_length != blank %}{% assign kh_count = kh_count | plus: 1 %}{% endif %}
+  {% if product_resource.metafields.custom.key_highlights.value.top_technique != blank %}{% assign kh_count = kh_count | plus: 1 %}{% endif %}
+  {% if product_resource.metafields.custom.key_highlights.value.top_length != blank %}{% assign kh_count = kh_count | plus: 1 %}{% endif %}
+  {% if product_resource.metafields.custom.key_highlights.value.package_contain != blank %}{% assign kh_count = kh_count | plus: 1 %}{% endif %}
+
+  <style>
+    .key-highlights-grid p { margin: 0; padding: 0; }
+    .key-highlights-grid.collapsed > div:nth-child(n+5) { display: none; }
+  </style>
+  <div class="product-key-highlights" style="margin-top: 30px; margin-bottom: 20px;">
+    <h2 style="font-size: 18px; font-weight: bold; margin-bottom: 15px; color: #000;">Key Highlights</h2>
+    <div id="key-highlights-grid-{{ product_resource.id }}" class="key-highlights-grid collapsed" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px 20px; padding-top: 5px;">
+      
+      {%- if product_resource.metafields.custom.key_highlights.value.fit != blank -%}
+        <div style="border-bottom: 1px solid #e5e5e5; padding-bottom: 10px;">
+          <div style="color: #666; font-size: 13px; margin-bottom: 4px;">Fit</div>
+          <div style="font-size: 14px; color: #000;">{{ product_resource.metafields.custom.key_highlights.value.fit | metafield_tag }}</div>
+        </div>
+      {%- endif -%}
+      
+      {%- if product_resource.metafields.custom.key_highlights.value.top_fabric != blank -%}
+        <div style="border-bottom: 1px solid #e5e5e5; padding-bottom: 10px;">
+          <div style="color: #666; font-size: 13px; margin-bottom: 4px;">Top Fabric</div>
+          <div style="font-size: 14px; color: #000;">{{ product_resource.metafields.custom.key_highlights.value.top_fabric | metafield_tag }}</div>
+        </div>
+      {%- endif -%}
+
+      {%- if product_resource.metafields.custom.key_highlights.value.neck != blank -%}
+        <div style="border-bottom: 1px solid #e5e5e5; padding-bottom: 10px;">
+          <div style="color: #666; font-size: 13px; margin-bottom: 4px;">Neck</div>
+          <div style="font-size: 14px; color: #000;">{{ product_resource.metafields.custom.key_highlights.value.neck | metafield_tag }}</div>
+        </div>
+      {%- endif -%}
+
+      {%- if product_resource.metafields.custom.key_highlights.value.sleeve_styling != blank -%}
+        <div style="border-bottom: 1px solid #e5e5e5; padding-bottom: 10px;">
+          <div style="color: #666; font-size: 13px; margin-bottom: 4px;">Sleeve Styling</div>
+          <div style="font-size: 14px; color: #000;">{{ product_resource.metafields.custom.key_highlights.value.sleeve_styling | metafield_tag }}</div>
+        </div>
+      {%- endif -%}
+
+      {%- if product_resource.metafields.custom.key_highlights.value.sleeve_length != blank -%}
+        <div style="border-bottom: 1px solid #e5e5e5; padding-bottom: 10px;">
+          <div style="color: #666; font-size: 13px; margin-bottom: 4px;">Sleeve Length</div>
+          <div style="font-size: 14px; color: #000;">{{ product_resource.metafields.custom.key_highlights.value.sleeve_length | metafield_tag }}</div>
+        </div>
+      {%- endif -%}
+
+      {%- if product_resource.metafields.custom.key_highlights.value.top_technique != blank -%}
+        <div style="border-bottom: 1px solid #e5e5e5; padding-bottom: 10px;">
+          <div style="color: #666; font-size: 13px; margin-bottom: 4px;">Top Technique</div>
+          <div style="font-size: 14px; color: #000;">{{ product_resource.metafields.custom.key_highlights.value.top_technique | metafield_tag }}</div>
+        </div>
+      {%- endif -%}
+
+      {%- if product_resource.metafields.custom.key_highlights.value.top_length != blank -%}
+        <div style="border-bottom: 1px solid #e5e5e5; padding-bottom: 10px;">
+          <div style="color: #666; font-size: 13px; margin-bottom: 4px;">Top Length</div>
+          <div style="font-size: 14px; color: #000;">{{ product_resource.metafields.custom.key_highlights.value.top_length | metafield_tag }}</div>
+        </div>
+      {%- endif -%}
+
+      {%- if product_resource.metafields.custom.key_highlights.value.package_contain != blank -%}
+        <div style="border-bottom: 1px solid #e5e5e5; padding-bottom: 10px;">
+          <div style="color: #666; font-size: 13px; margin-bottom: 4px;">Package Contain</div>
+          <div style="font-size: 14px; color: #000;">{{ product_resource.metafields.custom.key_highlights.value.package_contain | metafield_tag }}</div>
+        </div>
+      {%- endif -%}
+    </div>
+    
+    {% if kh_count > 4 %}
+      <div style="margin-top: 15px;">
+        <button type="button" onclick="
+          var grid = document.getElementById('key-highlights-grid-{{ product_resource.id }}');
+          grid.classList.toggle('collapsed');
+          this.innerText = grid.classList.contains('collapsed') ? 'Show More' : 'Show Less';
+        " style="color: #d15c7e; font-size: 14px; text-decoration: none; background: none; border: none; padding: 0; cursor: pointer;">Show More</button>
+      </div>
+    {% endif %}
+  </div>
+{%- endif -%}
+
 {% schema %}
 {
   "name": "t:names.product_variant_picker",

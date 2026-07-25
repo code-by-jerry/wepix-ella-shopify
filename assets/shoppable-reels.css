@@ -1,0 +1,414 @@
+/* Carousel */
+.shoppable-reels-carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 12px;
+  padding-bottom: 24px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+.shoppable-reels-carousel::-webkit-scrollbar {
+  display: none;
+}
+.shoppable-reel-card {
+  flex: 0 0 42vw;
+  max-width: 320px;
+  aspect-ratio: 9/16;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  scroll-snap-align: center;
+  cursor: pointer;
+  background: #000;
+}
+@media (min-width: 768px) {
+  .shoppable-reels-carousel {
+    gap: 16px;
+  }
+  .shoppable-reel-card {
+    border-radius: 12px;
+    flex: 0 0 220px;
+  }
+}
+@media (min-width: 990px) {
+  .shoppable-reel-card {
+    /* 6 in a row */
+    flex: 0 0 calc((100% - (16px * 5)) / 6);
+  }
+}
+
+/* Slider Controls */
+.shoppable-reels-slider-wrapper {
+  position: relative;
+  display: block;
+}
+.shoppable-reels-arrow {
+  position: absolute;
+  top: calc(50% - 12px); /* adjust for padding-bottom */
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 5;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  color: #111;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+@media (max-width: 989px) {
+  .shoppable-reels-arrow {
+    display: none; /* Hide on mobile to favor native swipe */
+  }
+}
+.shoppable-reels-slider-wrapper:hover .shoppable-reels-arrow {
+  opacity: 1;
+}
+.shoppable-reels-arrow.shoppable-reels-prev {
+  left: -22px;
+}
+.shoppable-reels-arrow.shoppable-reels-next {
+  right: -22px;
+}
+.shoppable-reels-arrow[disabled] {
+  opacity: 0;
+  pointer-events: none;
+}
+.shoppable-reels-arrow svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+.shoppable-reel-card video, .shoppable-reel-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+.shoppable-reel-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 40%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 12px;
+  pointer-events: none;
+}
+.shoppable-reel-play {
+  align-self: center;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,0.3);
+  backdrop-filter: blur(4px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.shoppable-reel-play svg {
+  width: 18px;
+  height: 18px;
+  fill: #fff;
+  margin-left: 2px;
+}
+.shoppable-reel-card-product {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.shoppable-reel-card-product img {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  object-fit: cover;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.shoppable-reel-card-product p {
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+@media (min-width: 768px) {
+  .shoppable-reel-overlay {
+    padding: 16px;
+  }
+  .shoppable-reel-play {
+    width: 48px;
+    height: 48px;
+  }
+  .shoppable-reel-play svg {
+    width: 24px;
+    height: 24px;
+    margin-left: 4px;
+  }
+  .shoppable-reel-card-product {
+    gap: 12px;
+  }
+  .shoppable-reel-card-product img {
+    width: 48px;
+    height: 48px;
+    border-radius: 6px;
+  }
+  .shoppable-reel-card-product p {
+    font-size: 1.3rem;
+  }
+}
+
+/* Modal */
+shoppable-reels-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,0.9);
+}
+shoppable-reels-modal[open] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.shoppable-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 8px;
+}
+.shoppable-modal-close svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+.shoppable-modal-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 450px;
+  max-height: 90vh;
+  background: #000;
+  overflow: hidden;
+}
+@media (min-width: 768px) {
+  .shoppable-modal-inner {
+    border-radius: 16px;
+    height: 90vh;
+    aspect-ratio: 9/16;
+  }
+}
+.shoppable-modal-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: auto;
+}
+.shoppable-modal-actions {
+  position: absolute;
+  right: 16px;
+  bottom: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 2;
+}
+.shoppable-modal-action-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
+}
+.shoppable-modal-action-btn svg {
+  width: 28px;
+  height: 28px;
+  fill: currentColor;
+}
+.shoppable-modal-mini-product {
+  position: absolute;
+  bottom: 24px;
+  left: 16px;
+  right: 16px;
+  background: rgba(255,255,255,0.95);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.shoppable-modal-mini-product-top {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.shoppable-modal-mini-product img {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.shoppable-modal-mini-product-info {
+  flex: 1;
+}
+.shoppable-modal-mini-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #111;
+  margin: 0 0 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.shoppable-modal-mini-price {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #111;
+  margin: 0;
+}
+.shoppable-modal-btn {
+  width: 100%;
+  background: #232323;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1.3rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.shoppable-modal-btn.loading {
+  color: transparent;
+  position: relative;
+}
+.shoppable-modal-btn.loading::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid #fff;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+/* Bottom Sheet Product Panel */
+.shoppable-bottom-sheet {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 75vh;
+  background: #fff;
+  border-radius: 20px 20px 0 0;
+  z-index: 10;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1);
+  display: flex;
+  flex-direction: column;
+}
+.shoppable-bottom-sheet.is-open {
+  transform: translateY(0);
+}
+.shoppable-sheet-header {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+}
+.shoppable-sheet-header h3 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.shoppable-sheet-close {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: #111;
+}
+.shoppable-sheet-close svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+.shoppable-sheet-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
+/* Overrides for standard product-info inside bottom sheet */
+.shoppable-sheet-content product-info {
+  margin: 0;
+  padding: 0;
+}
+.shoppable-sheet-content .product__media-wrapper,
+.shoppable-sheet-content share-button,
+.shoppable-sheet-content pickup-availability,
+.shoppable-sheet-content .product-popup,
+.shoppable-sheet-content .product__title {
+  display: none !important;
+}
+.shoppable-sheet-content .product__info-container {
+  padding: 0;
+  margin: 0;
+  max-width: 100%;
+}
+.shoppable-sheet-product-header {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.shoppable-sheet-product-header img {
+  width: 80px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.shoppable-sheet-product-header .details {
+  flex: 1;
+}
+.shoppable-sheet-product-header h4 {
+  margin: 0 0 8px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #111;
+}
