@@ -235,17 +235,50 @@
               {{ buttons_styles }}
             >
               {% if enable_navigation %}
-                {%- render 'swiper-button' -%}
-              {% endif %}
-
-              {% if enable_pagination %}
-                {{ pagi_html }}
+                <button class="hay-swiper-prev" aria-label="Previous slide">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" width="32" height="32">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                  </svg>
+                </button>
+                <button class="hay-swiper-next" aria-label="Next slide">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" width="32" height="32">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                  </svg>
+                </button>
               {% endif %}
             </div>
+
+            {% if enable_pagination %}
+              {{ pagi_html }}
+            {% endif %}
           </div>
         {% endif %}
       </div>
     </{{ element }}>
+
+    <script>
+      (function() {
+        var section = document.querySelector('#shopify-section-{{ section.id }}');
+        if (!section) return;
+        function wireButtons() {
+          var swiperEl = section.querySelector('.swiper');
+          if (!swiperEl || !swiperEl.swiper) return;
+          var swiper = swiperEl.swiper;
+          var prevBtn = section.querySelector('.hay-swiper-prev');
+          var nextBtn = section.querySelector('.hay-swiper-next');
+          if (prevBtn) prevBtn.addEventListener('click', function() { swiper.slidePrev(); });
+          if (nextBtn) nextBtn.addEventListener('click', function() { swiper.slideNext(); });
+        }
+        // Wait for swiper to initialize
+        var tries = 0;
+        var interval = setInterval(function() {
+          tries++;
+          wireButtons();
+          var swiperEl = section.querySelector('.swiper');
+          if ((swiperEl && swiperEl.swiper) || tries > 20) clearInterval(interval);
+        }, 200);
+      })();
+    </script>
 
     {%- if sec_stts.enable_multi_level_category -%}
       <div class="home-category-filter-sections">
@@ -595,6 +628,70 @@
     .slideshow .slideshow__slides {
       height: var(--hero-min-height-mb, auto);
     }
+  }
+
+  /* Custom Clean Chevron Arrows */
+  .slideshow .hay-swiper-prev,
+  .slideshow .hay-swiper-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.85;
+    transition: opacity 0.2s;
+    overflow: visible !important;
+  }
+  .slideshow .hay-swiper-prev::before,
+  .slideshow .hay-swiper-next::before,
+  .slideshow .hay-swiper-prev::after,
+  .slideshow .hay-swiper-next::after {
+    display: none !important;
+    content: none !important;
+  }
+  .slideshow .hay-swiper-prev .fill-bg,
+  .slideshow .hay-swiper-next .fill-bg {
+    display: none !important;
+  }
+  .slideshow .hay-swiper-prev:hover,
+  .slideshow .hay-swiper-next:hover {
+    opacity: 1;
+    background: none !important;
+  }
+  .slideshow .hay-swiper-prev {
+    left: 15px;
+  }
+  .slideshow .hay-swiper-next {
+    right: 15px;
+  }
+
+  /* Custom Slideshow Pagination - Dashed/Thin */
+  .slideshow .swiper-pagination {
+    position: absolute !important;
+    bottom: 25px !important;
+    left: 0 !important;
+    width: 100% !important;
+    z-index: 10 !important;
+    text-align: center !important;
+  }
+  .slideshow .swiper-pagination-bullet {
+    width: 30px !important;
+    height: 2px !important;
+    border-radius: 0 !important;
+    background: rgba(255, 255, 255, 0.5) !important;
+    opacity: 1 !important;
+    margin: 0 5px !important;
+    display: inline-block;
+  }
+  .slideshow .swiper-pagination-bullet-active {
+    background: #ffffff !important;
   }
 {%- endstylesheet -%}
 

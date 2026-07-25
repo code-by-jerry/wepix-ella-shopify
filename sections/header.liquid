@@ -1248,19 +1248,29 @@
     stroke: none !important;
   }
 
-  /* Disable default theme background underline for navbar menu items */
+  /* ============================================================
+     MEGA MENU: Disable default theme background underline
+  ============================================================ */
+
+  /* Strip background-gradient underlines from ALL header menu items */
   .header__inline-menu .header__menu-item .text,
   .header__inline-menu .header__menu-item {
     background: none !important;
   }
 
-  /* Custom left-to-right underline hover effect */
-  .header__inline-menu .header__menu-item .text {
+  /* ============================================================
+     MAIN NAV (Level-1): Custom scaleX underline on hover/active
+     Scoped ONLY to level-1 items - NOT mega menu sub-items
+  ============================================================ */
+  .list-menu--inline > li > .header__menu-item .text,
+  .list-menu--inline > li > .details--dropdown > summary .text {
     position: relative;
     padding-bottom: 2px !important;
   }
 
-  .header__inline-menu .header__menu-item .text::after {
+  /* The ::after underline pseudo-element — ONLY for level-1 */
+  .list-menu--inline > li > .header__menu-item .text::after,
+  .list-menu--inline > li > .details--dropdown > summary .text::after {
     content: '';
     position: absolute;
     width: 100%;
@@ -1273,14 +1283,88 @@
     transition: transform 0.25s ease-out;
   }
 
-  .header__inline-menu .header__menu-item:hover .text::after {
+  /* Hover: show underline on level-1 */
+  .list-menu--inline > li > .header__menu-item:hover .text::after,
+  .list-menu--inline > li > .details--dropdown:hover > summary .text::after {
     transform: scaleX(1);
   }
 
-  /* Active menu item has persistent underline */
-  .header__inline-menu .header__menu-item .text.header__active-menu-item::after,
-  .header__inline-menu .header__menu-item.list-menu__item--active .text::after {
+  /* Active: persistent underline when on page or child page is active */
+  .list-menu--inline > li > .header__menu-item .text.header__active-menu-item::after,
+  .list-menu--inline > li > .details--dropdown > summary .text.header__active-menu-item::after,
+  .list-menu--inline > li > .header__menu-item.list-menu__item--active .text::after {
     transform: scaleX(1) !important;
+  }
+
+  /* ============================================================
+     MEGA MENU: Strip background-gradient underline (theme default)
+     on all mega menu items
+  ============================================================ */
+  .mega-menu__content .link--hover-underline .text,
+  .mega-menu__list .link--hover-underline .text {
+    background-image: none !important;
+    background: none !important;
+  }
+
+  /* Hide the ::after pseudo-element underline leaking from main nav */
+  .mega-menu__link .text::after {
+    display: none !important;
+  }
+
+  /* ============================================================
+     LEVEL-2 (Submenu: "Dresses", "Kurtas")
+     — Black, semi-bold, uppercase, text-decoration underline on hover
+  ============================================================ */
+  .mega-menu__link--level-2,
+  .mega-menu__link--level-2 .text {
+    color: #000000 !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    transition: text-decoration-color 0.2s ease !important;
+  }
+
+  .mega-menu__link--level-2:hover,
+  .mega-menu__link--level-2:hover .text {
+    text-decoration: underline !important;
+    text-underline-offset: 3px !important;
+    text-decoration-color: #000000 !important;
+  }
+
+  /* ============================================================
+     LEVEL-3 (Nested: "New In", "Trending Now", etc.)
+     — XS size, regular weight, softer gray, border-bottom on hover
+  ============================================================ */
+  .mega-menu__link--level-3,
+  .mega-menu__link--level-3 .text {
+    color: #999999 !important;
+    font-size: 10.5px !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.8px !important;
+    text-transform: none !important;
+    text-decoration: none !important;
+  }
+
+  .mega-menu__link--level-3 {
+    border-bottom: 1px solid transparent !important;
+    transition: border-bottom-color 0.2s ease !important;
+    padding-bottom: 1px !important;
+  }
+
+  .mega-menu__link--level-3:hover {
+    border-bottom-color: #999999 !important;
+  }
+
+  /* ============================================================
+     FIX: Underline misalignment on SHOP (dropdown) vs HOME
+     Force .text <a> inside <summary> to always be display:inline
+     (not display:contents which flips on hover and shifts ::after)
+  ============================================================ */
+  .list-menu--inline > li > .details--dropdown > summary > .text,
+  .list-menu--inline > li > .details--dropdown > summary > a.text {
+    display: inline !important;
   }
 
 {%- endstylesheet -%}

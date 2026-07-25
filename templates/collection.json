@@ -307,7 +307,6 @@
         },
         "collection-header": {
           "type": "_collection-header",
-          "disabled": true,
           "static": true,
           "settings": {
             "padding-block-start": 0,
@@ -351,6 +350,7 @@
             "text_NKnynq": {
               "type": "text",
               "name": "t:names.heading",
+              "disabled": true,
               "settings": {
                 "text": "<h1>{{ closest.collection.title }}</h1>",
                 "collection_description_only": false,
@@ -424,6 +424,7 @@
             "text_RPNaLa": {
               "type": "text",
               "name": "t:names.text",
+              "disabled": true,
               "settings": {
                 "text": "{{ closest.collection.description }}",
                 "collection_description_only": true,

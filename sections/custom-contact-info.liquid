@@ -1,0 +1,163 @@
+<div class="custom-contact-info" style="padding: 60px 20px 80px; max-width: 1400px; margin: 0 auto;">
+  <h2 style="text-align: center; font-size: 3.5rem; font-weight: 400; margin-bottom: 50px; color: #1a1a1a;">
+    {{ section.settings.heading | escape }}
+  </h2>
+
+  <div class="custom-contact-info__grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;">
+    
+    <!-- Column 1 -->
+    <div class="info-col">
+      <h3 style="font-size: 1.8rem; font-weight: 400; margin-bottom: 20px; color: #1a1a1a;">
+        {{ section.settings.col1_heading | escape }}
+      </h3>
+      <p style="font-size: 1.4rem; color: #4a4a4a; line-height: 1.6; margin-bottom: 25px; min-height: 45px;">
+        {{ section.settings.col1_text }}
+      </p>
+      {% if section.settings.col1_button_label != blank %}
+        <a href="{{ section.settings.col1_button_link }}" style="display: inline-block; padding: 12px 30px; border: 1px solid #e5e5e5; color: #1a1a1a; text-decoration: none; font-size: 1.3rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.3s;" onmouseover="this.style.borderColor='#1a1a1a'; this.style.backgroundColor='#fafafa';" onmouseout="this.style.borderColor='#e5e5e5'; this.style.backgroundColor='transparent';">
+          {{ section.settings.col1_button_label | escape }}
+        </a>
+      {% endif %}
+    </div>
+
+    <!-- Column 2 -->
+    <div class="info-col">
+      <h3 style="font-size: 1.8rem; font-weight: 400; margin-bottom: 20px; color: #1a1a1a;">
+        {{ section.settings.col2_heading | escape }}
+      </h3>
+      <p style="font-size: 1.4rem; color: #4a4a4a; line-height: 1.6; margin-bottom: 25px; min-height: 45px;">
+        {{ section.settings.col2_text }}
+      </p>
+      {% if section.settings.col2_button_label != blank %}
+        <a href="{{ section.settings.col2_button_link }}" style="display: inline-block; padding: 12px 30px; border: 1px solid #e5e5e5; color: #1a1a1a; text-decoration: none; font-size: 1.3rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.3s;" onmouseover="this.style.borderColor='#1a1a1a'; this.style.backgroundColor='#fafafa';" onmouseout="this.style.borderColor='#e5e5e5'; this.style.backgroundColor='transparent';">
+          {{ section.settings.col2_button_label | escape }}
+        </a>
+      {% endif %}
+    </div>
+
+    <!-- Column 3 -->
+    <div class="info-col">
+      <h3 style="font-size: 1.8rem; font-weight: 400; margin-bottom: 20px; color: #1a1a1a;">
+        {{ section.settings.col3_heading | escape }}
+      </h3>
+      <p style="font-size: 1.4rem; color: #4a4a4a; line-height: 1.6; margin-bottom: 25px; min-height: 45px;">
+        {{ section.settings.col3_text }}
+      </p>
+      {% if section.settings.col3_button_label != blank %}
+        <a href="{{ section.settings.col3_button_link }}" style="display: inline-block; padding: 12px 30px; border: 1px solid #e5e5e5; color: #1a1a1a; text-decoration: none; font-size: 1.3rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.3s;" onmouseover="this.style.borderColor='#1a1a1a'; this.style.backgroundColor='#fafafa';" onmouseout="this.style.borderColor='#e5e5e5'; this.style.backgroundColor='transparent';">
+          {{ section.settings.col3_button_label | escape }}
+        </a>
+      {% endif %}
+    </div>
+
+  </div>
+</div>
+
+<style>
+  @media screen and (max-width: 900px) {
+    .custom-contact-info__grid {
+      grid-template-columns: 1fr !important;
+      gap: 50px !important;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Custom Contact Info",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Say Hello"
+    },
+    {
+      "type": "header",
+      "content": "Column 1"
+    },
+    {
+      "type": "text",
+      "id": "col1_heading",
+      "label": "Heading",
+      "default": "Find us here"
+    },
+    {
+      "type": "textarea",
+      "id": "col1_text",
+      "label": "Text",
+      "default": "Stitch and Silhouette Private Limited,147 Park Road,Erode-638003,TN"
+    },
+    {
+      "type": "text",
+      "id": "col1_button_label",
+      "label": "Button Label",
+      "default": "VISIT US"
+    },
+    {
+      "type": "url",
+      "id": "col1_button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Column 2"
+    },
+    {
+      "type": "text",
+      "id": "col2_heading",
+      "label": "Heading",
+      "default": "Talk to us"
+    },
+    {
+      "type": "textarea",
+      "id": "col2_text",
+      "label": "Text",
+      "default": "Call us on: 9944842672 (Available on Monday to Saturday from 10AM-6PM)"
+    },
+    {
+      "type": "text",
+      "id": "col2_button_label",
+      "label": "Button Label",
+      "default": "CALL"
+    },
+    {
+      "type": "url",
+      "id": "col2_button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Column 3"
+    },
+    {
+      "type": "text",
+      "id": "col3_heading",
+      "label": "Heading",
+      "default": "Reach Us by Email"
+    },
+    {
+      "type": "textarea",
+      "id": "col3_text",
+      "label": "Text",
+      "default": "Feel free to reach out to us at care@hayclothing.in"
+    },
+    {
+      "type": "text",
+      "id": "col3_button_label",
+      "label": "Button Label",
+      "default": "MAIL US"
+    },
+    {
+      "type": "url",
+      "id": "col3_button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Contact Info"
+    }
+  ]
+}
+{% endschema %}

@@ -1,4 +1,5 @@
 {% liquid
+  assign image = collection.image | default: block.settings.image
   assign ratio = 1
 
   case block.settings.image_ratio
@@ -7,19 +8,22 @@
     when 'portrait'
       assign ratio = '4 / 5'
     when 'adapt'
-      assign ratio = block.settings.image.aspect_ratio
+      if image != blank
+        assign ratio = image.aspect_ratio
+      endif
   endcase
 
   if ratio == 0 or ratio == null
     assign ratio = 1
   endif
 
-  assign image = block.settings.image
-  assign image_height = block.settings.image.height
-  assign image_height_2x = image_height | times: 2
-  assign image_width = block.settings.image.width
-  assign image_width_2x = image_width | times: 2
-  assign image_aspect_ratio = block.settings.image.aspect_ratio
+  if image != blank
+    assign image_height = image.height
+    assign image_height_2x = image_height | times: 2
+    assign image_width = image.width
+    assign image_width_2x = image_width | times: 2
+    assign image_aspect_ratio = image.aspect_ratio
+  endif
 %}
 
 

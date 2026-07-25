@@ -63,7 +63,7 @@
                   style="{%  render 'highlight-style', order: '1', keys: keys, compare: link.title, settings: section.settings %}"
                 >
                   <a
-                    class="text{% if link.url == request.path %} header__active-menu-item{% endif %}"
+                    class="text{% if link.current or link.child_active %} header__active-menu-item{% endif %}"
                     {% if link.url != blank %}
                       href="{{ link.url }}"
                     {% else %}
