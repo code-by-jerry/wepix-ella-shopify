@@ -1109,7 +1109,7 @@
   }
 
   /* ===== Hide side-drawer by default (prevent layout inflation before JS) ===== */
-  side-drawer:not([open]) {
+  header-component side-drawer {
     display: none !important;
   }
 
@@ -1134,6 +1134,7 @@
       justify-content: space-between !important;
       width: 100% !important;
       position: relative !important;
+      padding: 0 15px !important;
     }
 
     /* Left column: hamburger only — minimal, flex auto */
@@ -1156,6 +1157,13 @@
       transform: translateX(-50%) !important;
       pointer-events: auto !important;
       z-index: 1 !important;
+    }
+
+    /* Mobile logo size adjustment */
+    .header__row--top .header__column--left .header-logo img,
+    .header__row--top .header__column--left .header-logo svg {
+      max-width: 70px !important;
+      height: auto !important;
     }
 
     /* Hamburger sits on top of the centered logo */
