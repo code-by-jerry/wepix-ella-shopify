@@ -228,6 +228,29 @@
             <span class="text">{{ block.settings.title | escape }}</span>
           {%- endif -%}
         </a>
+      {%- when 'menu' -%}
+        <side-drawer-opener
+          class="{{ class_toolbar_item }}"
+          data-side-drawer="#Drawer-Menu"
+        >
+          <button
+            class="{{ class_button }}"
+            type="button"
+            aria-haspopup="dialog"
+            aria-label="{{ 'accessibility.menu' | t }}"
+          >
+            <span class="svg-wrapper">
+              {%- if block.settings.icon != blank -%}
+                {{ block.settings.icon }}
+              {%- else -%}
+                {{ 'icon-hamburger.svg' | inline_asset_content }}
+              {%- endif -%}
+            </span>
+            {%- if block.settings.title != blank -%}
+              <span class="text">{{ block.settings.title | escape }}</span>
+            {%- endif -%}
+          </button>
+        </side-drawer-opener>
     {%- endcase -%}
   {%- endfor -%}
 </toolbar-mobile>
@@ -436,18 +459,30 @@
           "label": "t:settings.link"
         }
       ]
+    },
+    {
+      "type": "menu",
+      "name": "Menu",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "icon",
+          "label": "t:settings.svg_icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:settings.title",
+          "default": "Menu"
+        }
+      ]
     }
   ],
   "presets": [
     {
       "name": "t:names.sticky_toolbar_mobile",
       "blocks": [
-        {
-          "type": "search"
-        },
-        {
-          "type": "account"
-        },
         {
           "type": "link",
           "settings": {
@@ -457,10 +492,16 @@
           }
         },
         {
-          "type": "cart"
+          "type": "menu"
         },
         {
-          "type": "wishlist"
+          "type": "search"
+        },
+        {
+          "type": "account"
+        },
+        {
+          "type": "cart"
         }
       ]
     }

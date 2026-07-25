@@ -1041,6 +1041,13 @@
     background-color: #ffffff !important;
   }
 
+  /* Prevent oversized placeholder gap from sticky header section wrapper */
+  @media (min-width: 990px) {
+    .header-group-section {
+      min-height: 0 !important;
+    }
+  }
+
   /* Force logo size always static (no transitions or scale effect) */
   .header-logo__image-container, 
   .header__heading-logo-wrapper {
@@ -1077,27 +1084,109 @@
     padding-bottom: 0.4rem !important;
   }
 
-  /* Center Navbar Menu Items Horizontally and Vertically */
-  .header-block.header-menu {
-    justify-content: center !important;
-    width: 100% !important;
+  /* Center Navbar Menu Items Horizontally and Vertically - Desktop Only */
+  @media (min-width: 990px) {
+    .header-block.header-menu {
+      justify-content: center !important;
+      width: 100% !important;
+    }
+    .header__inline-menu {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      width: 100% !important;
+    }
+    .list-menu--inline {
+      display: inline-flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+    }
+    .header__inline-menu .header__menu-item {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
   }
-  .header__inline-menu {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    width: 100% !important;
+
+  /* ===== Hide side-drawer by default (prevent layout inflation before JS) ===== */
+  side-drawer:not([open]) {
+    display: none !important;
   }
-  .list-menu--inline {
-    display: inline-flex !important;
-    justify-content: center !important;
-    align-items: center !important;
+
+  /* ===== MOBILE: Hide desktop nav, force hamburger | logo | icons layout ===== */
+  @media (max-width: 989px) {
+
+    /* Hide the desktop navigation menu entirely on mobile */
+    .header-block.header-menu,
+    header-menu {
+      display: none !important;
+    }
+
+    /* Hide the desktop-only search icon (has max-md:hidden class) */
+    .header__search.max-md\:hidden {
+      display: none !important;
+    }
+
+    /* Make the header row a flex layout with relative for logo centering */
+    .header__row--top .header__columns {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      width: 100% !important;
+      position: relative !important;
+    }
+
+    /* Left column: hamburger only — minimal, flex auto */
+    .header__row--top .header__column--left {
+      display: flex !important;
+      align-items: center !important;
+      flex: 0 0 auto !important;
+      z-index: 2 !important;
+    }
+
+    /* Hide center column (desktop nav menu lives here) */
+    .header__row--top .header__column--center {
+      display: none !important;
+    }
+
+    /* Absolutely center the logo (it's in the left column on desktop) */
+    .header__row--top .header__column--left .header-logo {
+      position: absolute !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+      pointer-events: auto !important;
+      z-index: 1 !important;
+    }
+
+    /* Hamburger sits on top of the centered logo */
+    .header__row--top .header__column--left .header__icon--menu {
+      position: relative !important;
+      z-index: 3 !important;
+    }
+
+    /* Right column: search + account + cart — compact and tight */
+    .header__row--top .header__column--right {
+      display: flex !important;
+      align-items: center !important;
+      gap: 2px !important;
+      flex: 0 0 auto !important;
+      z-index: 2 !important;
+    }
+
+    /* Make all header icons compact on mobile */
+    .header__row--top .header__icon {
+      width: 36px !important;
+      height: 36px !important;
+      padding: 6px !important;
+    }
+
+    /* Mobile icon SVG sizes */
+    .header__row--top .header__icon svg {
+      width: 20px !important;
+      height: 20px !important;
+    }
   }
-  .header__inline-menu .header__menu-item {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-  }
+
 
   /* Hide Wishlist Icon */
   .header__icon--wishlist,

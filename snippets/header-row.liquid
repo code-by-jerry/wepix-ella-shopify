@@ -15,7 +15,7 @@
     assign item_column = settings[column_key] | default: 'left'
 
     case item
-      when 'account', 'actions'
+      when 'account', 'actions', 'mobile_search'
         assign item_column = 'right'
     endcase
 
