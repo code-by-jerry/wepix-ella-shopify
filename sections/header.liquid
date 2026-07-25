@@ -1036,17 +1036,9 @@
   /* Simple white bg navbar (overriding transparency hover colors/borders) */
   #header-component {
     background-color: #ffffff !important;
-    height: auto !important;
-    min-height: unset !important;
   }
   #header-component .header__row {
     background-color: #ffffff !important;
-    height: auto !important;
-    min-height: unset !important;
-  }
-  .header-wrapper {
-    height: auto !important;
-    min-height: unset !important;
   }
 
   /* Force logo size always static (no transitions or scale effect) */
@@ -1054,8 +1046,6 @@
   .header__heading-logo-wrapper {
     transform: none !important;
     transition: none !important;
-    height: auto !important;
-    max-height: unset !important;
   }
 
   /* Reduce vertical padding (py) for the navbar */
@@ -1159,6 +1149,41 @@
   .header__icon:hover #svgkp path[fill="#FEA203"] {
     fill: #FEA203 !important;
     stroke: none !important;
+  }
+
+  /* Disable default theme background underline for navbar menu items */
+  .header__inline-menu .header__menu-item .text,
+  .header__inline-menu .header__menu-item {
+    background: none !important;
+  }
+
+  /* Custom left-to-right underline hover effect */
+  .header__inline-menu .header__menu-item .text {
+    position: relative;
+    padding-bottom: 2px !important;
+  }
+
+  .header__inline-menu .header__menu-item .text::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background-color: currentColor;
+    transform-origin: bottom left;
+    transition: transform 0.25s ease-out;
+  }
+
+  .header__inline-menu .header__menu-item:hover .text::after {
+    transform: scaleX(1);
+  }
+
+  /* Active menu item has persistent underline */
+  .header__inline-menu .header__menu-item .text.header__active-menu-item::after,
+  .header__inline-menu .header__menu-item.list-menu__item--active .text::after {
+    transform: scaleX(1) !important;
   }
 
 {%- endstylesheet -%}

@@ -120,12 +120,17 @@ function deferUntilInteraction(fn) {
 }
 
 (function() {
-  window.addEventListener('DOMContentLoaded', () => {
+  const addHeaderClass = () => {
     const headerSection = document.querySelector('.header-section');
     if (headerSection) {
       headerSection.classList.add('header-group-section');
     }
-  });
+  };
+  if (document.readyState === 'loading') {
+    window.addEventListener('DOMContentLoaded', addHeaderClass);
+  } else {
+    addHeaderClass();
+  }
 })();
 
 function subscribe(eventName, callback) {
