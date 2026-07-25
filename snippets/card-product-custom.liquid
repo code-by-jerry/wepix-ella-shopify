@@ -1,0 +1,203 @@
+{% comment %}
+  Renders a custom product card matching the Hay Clothing design
+  Accepts:
+  - product_card_product: {Object} Product Liquid object
+{% endcomment %}
+
+{%- if product_card_product and product_card_product != empty -%}
+  <div class="custom-card-product">
+    <a href="{{ product_card_product.url | default: '#' }}" class="custom-card-product__link">
+      <div class="custom-card-product__media">
+        {%- if product_card_product.tags contains 'new' or product_card_product.tags contains 'New' or product_card_product.tags contains 'NEW' -%}
+          <div class="custom-card-product__badge">New</div>
+        {%- endif -%}
+
+        {%- if product_card_product.featured_media -%}
+          <img
+            srcset="{%- if product_card_product.featured_media.width >= 165 -%}{{ product_card_product.featured_media | image_url: width: 165 }} 165w,{%- endif -%}
+              {%- if product_card_product.featured_media.width >= 360 -%}{{ product_card_product.featured_media | image_url: width: 360 }} 360w,{%- endif -%}
+              {%- if product_card_product.featured_media.width >= 533 -%}{{ product_card_product.featured_media | image_url: width: 533 }} 533w,{%- endif -%}
+              {%- if product_card_product.featured_media.width >= 720 -%}{{ product_card_product.featured_media | image_url: width: 720 }} 720w,{%- endif -%}
+              {%- if product_card_product.featured_media.width >= 940 -%}{{ product_card_product.featured_media | image_url: width: 940 }} 940w,{%- endif -%}
+              {%- if product_card_product.featured_media.width >= 1066 -%}{{ product_card_product.featured_media | image_url: width: 1066 }} 1066w,{%- endif -%}
+              {{ product_card_product.featured_media | image_url }} {{ product_card_product.featured_media.width }}w"
+            src="{{ product_card_product.featured_media | image_url: width: 533 }}"
+            sizes="(min-width: 1200px) 267px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
+            alt="{{ product_card_product.featured_media.alt | escape }}"
+            class="custom-card-product__image"
+            loading="lazy"
+            width="{{ product_card_product.featured_media.width }}"
+            height="{{ product_card_product.featured_media.height }}"
+          >
+          {%- if product_card_product.media[1] != nil -%}
+            <img
+              srcset="{%- if product_card_product.media[1].width >= 165 -%}{{ product_card_product.media[1] | image_url: width: 165 }} 165w,{%- endif -%}
+                {%- if product_card_product.media[1].width >= 360 -%}{{ product_card_product.media[1] | image_url: width: 360 }} 360w,{%- endif -%}
+                {%- if product_card_product.media[1].width >= 533 -%}{{ product_card_product.media[1] | image_url: width: 533 }} 533w,{%- endif -%}
+                {%- if product_card_product.media[1].width >= 720 -%}{{ product_card_product.media[1] | image_url: width: 720 }} 720w,{%- endif -%}
+                {%- if product_card_product.media[1].width >= 940 -%}{{ product_card_product.media[1] | image_url: width: 940 }} 940w,{%- endif -%}
+                {%- if product_card_product.media[1].width >= 1066 -%}{{ product_card_product.media[1] | image_url: width: 1066 }} 1066w,{%- endif -%}
+                {{ product_card_product.media[1] | image_url }} {{ product_card_product.media[1].width }}w"
+              src="{{ product_card_product.media[1] | image_url: width: 533 }}"
+              sizes="(min-width: 1200px) 267px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
+              alt="{{ product_card_product.media[1].alt | escape }}"
+              class="custom-card-product__image-hover"
+              loading="lazy"
+              width="{{ product_card_product.media[1].width }}"
+              height="{{ product_card_product.media[1].height }}"
+            >
+          {%- endif -%}
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'custom-card-product__image placeholder-svg' }}
+        {%- endif -%}
+      </div>
+
+      <div class="custom-card-product__info">
+        <h3 class="custom-card-product__title">{{ product_card_product.title | escape }}</h3>
+        
+        <div class="custom-card-product__price">
+          {%- if product_card_product.price_varies -%}
+            From {{ product_card_product.price_min | money_without_trailing_zeros }}
+          {%- else -%}
+            {{ product_card_product.price | money_without_trailing_zeros }}
+          {%- endif -%}
+        </div>
+
+        {%- for option in product_card_product.options_with_values -%}
+          {%- assign option_name_downcase = option.name | downcase -%}
+          {%- if option_name_downcase == 'size' or option_name_downcase == 'sizes' -%}
+            <div class="custom-card-product__sizes">
+              {%- for value in option.values -%}
+                <span class="custom-card-product__size-box">{{ value | escape }}</span>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </a>
+  </div>
+{%- endif -%}
+
+<style>
+  .custom-card-product {
+    display: block;
+    width: 100%;
+    position: relative;
+    background: #ffffff;
+    box-sizing: border-box;
+  }
+
+  .custom-card-product__link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .custom-card-product__media {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    background-color: #f4f4f4;
+    margin-bottom: 12px;
+    border-radius: 6px;
+  }
+
+  .custom-card-product__image,
+  .custom-card-product__image-hover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.4s ease-in-out;
+  }
+
+  .custom-card-product__image-hover {
+    opacity: 0;
+    z-index: 1;
+  }
+
+  .custom-card-product:hover .custom-card-product__image {
+    opacity: 0;
+  }
+
+  .custom-card-product:hover .custom-card-product__image-hover {
+    opacity: 1;
+  }
+
+  .custom-card-product__badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-transform: capitalize;
+    z-index: 2;
+    letter-spacing: 0.5px;
+  }
+
+  .custom-card-product__info {
+    padding: 0 4px;
+    text-align: left;
+  }
+
+  .custom-card-product__title {
+    font-family: var(--font-body-family);
+    font-size: 14px;
+    font-weight: 500;
+    color: #111111;
+    margin: 0 0 6px 0;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-decoration: none;
+  }
+
+  /* Group hover underline */
+  .custom-card-product:hover .custom-card-product__title {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .custom-card-product__price {
+    font-family: var(--font-body-family);
+    font-size: 14px;
+    color: #333333;
+    margin-bottom: 12px;
+  }
+
+  .custom-card-product__sizes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .custom-card-product__size-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+    padding: 0 6px;
+    border: 1px solid #e0e0e0;
+    background-color: #ffffff;
+    color: #333333;
+    font-size: 12px;
+    font-weight: 400;
+    font-family: var(--font-body-family);
+    transition: border-color 0.2s ease;
+  }
+  
+  .custom-card-product:hover .custom-card-product__size-box {
+    border-color: #999999;
+  }
+</style>

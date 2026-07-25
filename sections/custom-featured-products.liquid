@@ -1,0 +1,125 @@
+{% schema %}
+{
+  "name": "Custom Featured Prod",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "FEATURED PRODUCTS"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 4,
+      "label": "Maximum products to show"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Featured Prod"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .custom-featured-products__title {
+    text-align: center;
+    margin: 0 0 30px;
+    color: #111111;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-family: var(--font-body-family);
+  }
+
+  .custom-featured-products__grid {
+    display: grid;
+    /* 2 columns on mobile */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  /* 4 columns on desktop */
+  @media screen and (min-width: 990px) {
+    .custom-featured-products__grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+  }
+</style>
+
+<div class="custom-featured-products section-{{ section.id }}-padding">
+  {%- if section.settings.title != blank -%}
+    <h2 class="custom-featured-products__title">{{ section.settings.title | escape }}</h2>
+  {%- endif -%}
+
+  <div class="custom-featured-products__grid">
+    {%- if section.settings.collection != blank -%}
+      {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
+        {% render 'card-product-custom', product_card_product: product %}
+      {%- endfor -%}
+    {%- else -%}
+      {%- for i in (1..section.settings.products_to_show) -%}
+        <div class="custom-card-product placeholder">
+          <div class="custom-card-product__media">
+            {{ 'product-' | append: i | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+          <div class="custom-card-product__info">
+            <h3 class="custom-card-product__title">Example Product Title</h3>
+            <div class="custom-card-product__price">From ₹1,049</div>
+            <div class="custom-card-product__sizes">
+              <span class="custom-card-product__size-box">S</span>
+              <span class="custom-card-product__size-box">M</span>
+              <span class="custom-card-product__size-box">L</span>
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</div>

@@ -1242,10 +1242,71 @@
             "content": "<p>Tab custom HTML</p>",
             "page": ""
           }
+        },
+        "html_customer_care": {
+          "type": "html",
+          "settings": {
+            "title": "Customer Care",
+            "custom_content_type": "different",
+            "product_tab_key_metafield": "customer_care"
+          }
+        },
+        "html_shipping": {
+          "type": "html",
+          "settings": {
+            "title": "Shipping & Exchanges",
+            "custom_content_type": "different",
+            "product_tab_key_metafield": "shipping_exchanges"
+          }
+        },
+        "html_wash_care": {
+          "type": "html",
+          "settings": {
+            "title": "Wash Care Instructions",
+            "custom_content_type": "different",
+            "product_tab_key_metafield": "wash_care_instructions"
+          }
+        },
+        "html_offers": {
+          "type": "html",
+          "settings": {
+            "title": "Offers",
+            "custom_content_type": "different",
+            "product_tab_key_metafield": "offers"
+          }
+        },
+        "html_size_guide": {
+          "type": "html",
+          "settings": {
+            "title": "Size Guide",
+            "custom_content_type": "different",
+            "product_tab_key_metafield": "size_guide"
+          }
+        },
+        "liquid_key_highlights": {
+          "type": "liquid",
+          "settings": {
+            "title": "Key Highlights",
+            "custom_liquid": "{%- if product.metafields.custom.key_highlights != blank -%}<ul style=\"list-style-type: disc; margin-left: 20px;\">{%- if product.metafields.custom.key_highlights.value.fit != blank -%}<li><strong>Fit:</strong> {{ product.metafields.custom.key_highlights.value.fit }}</li>{%- endif -%}{%- if product.metafields.custom.key_highlights.value.top_fabric != blank -%}<li><strong>Top Fabric:</strong> {{ product.metafields.custom.key_highlights.value.top_fabric }}</li>{%- endif -%}{%- if product.metafields.custom.key_highlights.value.neck != blank -%}<li><strong>Neck:</strong> {{ product.metafields.custom.key_highlights.value.neck }}</li>{%- endif -%}{%- if product.metafields.custom.key_highlights.value.sleeve_styling != blank -%}<li><strong>Sleeve Styling:</strong> {{ product.metafields.custom.key_highlights.value.sleeve_styling }}</li>{%- endif -%}{%- if product.metafields.custom.key_highlights.value.sleeve_length != blank -%}<li><strong>Sleeve Length:</strong> {{ product.metafields.custom.key_highlights.value.sleeve_length }}</li>{%- endif -%}{%- if product.metafields.custom.key_highlights.value.top_technique != blank -%}<li><strong>Top Technique:</strong> {{ product.metafields.custom.key_highlights.value.top_technique }}</li>{%- endif -%}{%- if product.metafields.custom.key_highlights.value.top_length != blank -%}<li><strong>Top Length:</strong> {{ product.metafields.custom.key_highlights.value.top_length }}</li>{%- endif -%}{%- if product.metafields.custom.key_highlights.value.package_contain != blank -%}<li><strong>Package Contain:</strong> {{ product.metafields.custom.key_highlights.value.package_contain }}</li>{%- endif -%}</ul>{%- endif -%}"
+          }
+        },
+        "liquid_is_certified": {
+          "type": "liquid",
+          "settings": {
+            "title": "Certification Status",
+            "custom_liquid": "{%- if product.metafields.custom.is_certified == true -%}<div style=\"display: inline-block; padding: 4px 10px; background: #000; color: #fff; font-size: 12px; font-weight: bold; margin-bottom: 15px; border-radius: 4px;\">✓ CERTIFIED PRODUCT</div>{%- endif -%}"
+          }
         }
       },
       "block_order": [
+        "liquid_is_certified",
         "description_KGH7xF",
+        "liquid_key_highlights",
+        "html_size_guide",
+        "html_wash_care",
+        "html_shipping",
+        "html_customer_care",
+        "html_offers",
         "html_bpg6VR"
       ],
       "name": "t:names.product_tabs",
